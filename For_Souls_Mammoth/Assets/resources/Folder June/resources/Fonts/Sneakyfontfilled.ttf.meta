@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 887ef4ecc4000c647adf238ff70b27b4
+guid: edf816f9298477945a13972f01a4150b
 TrueTypeFontImporter:
   serializedVersion: 2
-  fontSize: 16
+  fontSize: 40
   forceTextureCase: -2
   characterSpacing: 1
   characterPadding: 0
@@ -12,3 +12,5 @@ TrueTypeFontImporter:
   customCharacters: 
   fontRenderingMode: 2
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
