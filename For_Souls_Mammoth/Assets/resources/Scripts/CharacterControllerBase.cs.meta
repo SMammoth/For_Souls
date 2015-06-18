@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 69a12eab01c67784097f3b2a36964251
+timeCreated: 1431557958
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - ClockPickup: {fileID: 21300000, guid: 4b05b48aa8d18a54dae503f15e3706a8, type: 3}
+  - groundCheck: {instanceID: 0}
+  - SlideCheck: {instanceID: 0}
+  - Jump: {instanceID: 0}
+  - Scream: {instanceID: 0}
+  - Slide: {instanceID: 0}
+  - Coin: {fileID: 8300000, guid: 9cff3a234b0f8e44fa44e1bd907d34a6, type: 3}
+  - Clock: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
