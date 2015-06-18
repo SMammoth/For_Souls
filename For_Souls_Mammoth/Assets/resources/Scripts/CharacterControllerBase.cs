@@ -161,7 +161,6 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     }
                 }
 
-                //JUMP
                 if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
                 {
                     //play animation jump
@@ -173,9 +172,12 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     GetComponent<AudioSource>().clip = Jump;
                     GetComponent<AudioSource>().Play();
 
+                   
                     //add force for jump
                     MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, 0);
                     MyBody2D.AddForce(new Vector2(0, Jumpforce));
+
+                   
 
                     maxspeed = JumpAdjust;
 
