@@ -27,6 +27,8 @@ public abstract class CharacterControllerBase : MonoBehaviour
 	public LayerMask whatIsGround;
     public float trampolineForce;
 
+	float ButtonForce;
+
 	[Header("Sliding")]
 	public int SlideAdjust;
 
@@ -162,7 +164,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
                 }
 
                 //JUMP
-                if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
+				if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
                 {
                     //play animation jump
                     PlayerAnimator.SetTrigger("Jump");
@@ -186,6 +188,11 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     SlidingTimer = 0;
                     Sliding = false;
                 }
+
+				if(player.GetButtonUp("Jump"))
+				{
+					MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, 0);
+				}
 
                 //SLIDE
                 if (!Sliding && grounded && player.GetButtonDown("Duck"))
