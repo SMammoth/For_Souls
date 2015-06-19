@@ -6,7 +6,7 @@ using System.Collections;
 public abstract class CharacterControllerBase : MonoBehaviour
 {
 	public int playerId;
-	private Player player;
+	public Player player;
 
 	public Sprite ClockPickup;
     bool bombExploding = false;
