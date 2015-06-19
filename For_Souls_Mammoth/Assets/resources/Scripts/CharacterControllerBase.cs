@@ -27,8 +27,6 @@ public abstract class CharacterControllerBase : MonoBehaviour
 	public LayerMask whatIsGround;
     public float trampolineForce;
 
-	float ButtonForce;
-
 	[Header("Sliding")]
 	public int SlideAdjust;
 
@@ -163,13 +161,9 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     }
                 }
 
-<<<<<<< HEAD
                 //JUMP
 				if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
-=======
-                if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
->>>>>>> 5e46211109a7803213010a2737e74d4dfffd84cc
-                {
+				{
                     //play animation jump
                     PlayerAnimator.SetTrigger("Jump");
                     //play Particle
@@ -178,13 +172,10 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     //Play Sound
                     GetComponent<AudioSource>().clip = Jump;
                     GetComponent<AudioSource>().Play();
-
                    
                     //add force for jump
                     MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, 0);
                     MyBody2D.AddForce(new Vector2(0, Jumpforce));
-
-                   
 
                     maxspeed = JumpAdjust;
 
@@ -198,7 +189,13 @@ public abstract class CharacterControllerBase : MonoBehaviour
 
 				if(player.GetButtonUp("Jump"))
 				{
-					MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, 0);
+					if(MyBody2D.velocity.y > 0)
+					{
+						float bla = MyBody2D.velocity.y;
+						bla = bla / 1.5f;
+
+						MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, bla);
+					}
 				}
 
                 //SLIDE
