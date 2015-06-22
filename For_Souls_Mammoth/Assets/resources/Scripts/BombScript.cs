@@ -6,6 +6,7 @@ public class BombScript : MonoBehaviour {
     public float explosionPower;
     public float explosionRadius;
 
+    GameObject particleGameObject;
 	// Use this for initialization
 	void Start () {
 	
@@ -32,15 +33,17 @@ public class BombScript : MonoBehaviour {
     {
         if (coll.transform.tag == "Player")
         {
-           Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity);
+            particleGameObject = Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity) as GameObject;
            AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 100, gameObject.transform.position, explosionRadius);
            Destroy(gameObject);
+           Destroy(particleGameObject, .001f);
         }
         else if (coll.gameObject)
         {
-            Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity);
+            particleGameObject = Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity) as GameObject;
             AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 50, gameObject.transform.position, explosionRadius);
             Destroy(gameObject);
+            Destroy(particleGameObject, .001f);
         }
     }
 }
