@@ -7,7 +7,6 @@ public class Camera2D : MonoBehaviour {
     private Player1_Class playerObject;
 
 	public Vector2 margin, smoothing;
-    public BoxCollider2D firstCollider, secondCollider;
 
     public float cameraXPos = 8;
 
@@ -31,7 +30,7 @@ public class Camera2D : MonoBehaviour {
 
 		if (isFollowing) {
 			if(Mathf.Abs(x - player.position.x) > margin.x)
-				x = Mathf.Lerp(x, player.position.x + cameraXPos, smoothing.x * Time.deltaTime);
+				x = Mathf.Lerp(x, player.position.x, smoothing.x * Time.deltaTime);
 
 			if(Mathf.Abs(y - player.position.y) > margin.y)
 				y = Mathf.Lerp(y, player.position.y, smoothing.y * Time.deltaTime);

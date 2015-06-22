@@ -64,7 +64,11 @@ public abstract class CharacterControllerBase : MonoBehaviour
 	Vector2 StartPosition;
 
 	bool Upgrade;
-
+    GameObject newBullet;
+    GameObject defauttAttack, arkUpgradeAttack;
+    bool doAnimation = false;
+    public bool upgraded = false, shootUpgrade = false, arkBombUpgrade = false, arkPunchUpgrade = false;
+    Quaternion oldRotation;
 
 	void awake ()
 	{
@@ -91,6 +95,13 @@ public abstract class CharacterControllerBase : MonoBehaviour
 		PlayerBoxCollider = GetComponent<PolygonCollider2D> ();
 
 		PlayerAnimator = GetComponent<Animator> ();
+
+        defauttAttack = GameObject.Find("DefaultAttack").gameObject;
+        defauttAttack.SetActive(false);
+        arkUpgradeAttack = GameObject.Find("ArkUpgradeAttack").gameObject;
+        arkUpgradeAttack.SetActive(false);
+
+        oldRotation = arkUpgradeAttack.transform.rotation;
 
 		//no collision with the other players
 		Players = GameObject.FindGameObjectsWithTag ("Player");
@@ -160,7 +171,22 @@ public abstract class CharacterControllerBase : MonoBehaviour
                         MyBody2D.velocity = new Vector2(accel * maxspeed, MyBody2D.velocity.y);
                     }
                 }
-
+                if (!upgraded && !shootUpgrade && !arkBombUpgrade && !arkPunchUpgrade)
+                {
+                    DefaultAttack();
+                }
+                else if(upgraded && shootUpgrade && !arkBombUpgrade && !arkPunchUpgrade)
+                {
+                    ShootingUpgrade(200000);
+                }
+                else if (upgraded && !shootUpgrade && arkBombUpgrade && !arkPunchUpgrade)
+                {
+                    ArkThrow(40000, 50000);
+                }
+                else if (upgraded && !shootUpgrade && !arkBombUpgrade && arkPunchUpgrade)
+                {
+                    ArkAttackUpgrade(20, 300);
+                }
                 //JUMP
 				if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
 				{
@@ -262,6 +288,112 @@ public abstract class CharacterControllerBase : MonoBehaviour
             else
             {
                 PlayerAnimator.SetBool("Idle", false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// this is the player default attack
+    /// </summary>
+    void DefaultAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            defauttAttack.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.X) || player.GetButtonUp("Shoot"))
+        {
+            defauttAttack.SetActive(false);
+        }
+    }
+    /// <summary>
+    /// The Ark upgrade is a swipe attack from top to bottom
+    /// </summary>
+    /// <param name="hitTime"></param>
+    void ArkAttackUpgrade(float hitTime, float rotateTime)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            doAnimation = true;
+        }
+        if(arkUpgradeAttack.transform.position == GameObject.Find("targetArk").transform.position)
+        {
+            if (transform.localScale.x == 10) //shooting to the right.
+            {
+                arkUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y + 1);
+            }
+            else if (transform.localScale.x == -10) //shooting to the right.
+            {
+                arkUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y + 1);
+            }
+            arkUpgradeAttack.transform.rotation = oldRotation;
+            arkUpgradeAttack.SetActive(false);
+            doAnimation = false;
+        }
+
+        if (doAnimation)
+        {
+            arkUpgradeAttack.SetActive(true);
+            arkUpgradeAttack.transform.position = Vector2.MoveTowards(arkUpgradeAttack.transform.position, GameObject.Find("targetArk").transform.position, hitTime * Time.deltaTime);
+            arkUpgradeAttack.transform.rotation = Quaternion.RotateTowards(arkUpgradeAttack.transform.rotation, GameObject.Find("targetArk").transform.rotation, rotateTime * Time.deltaTime);
+        }
+    }
+
+
+    /// <summary>
+    /// Throw a object in the air in a ark
+    /// </summary>
+    /// <param name="arkSpeed"></param>
+    void ArkThrow(float arkSpeed, float verticalSpeed)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArkThrow", typeof(GameObject)) as GameObject);
+            newBullet.transform.position = gameObject.transform.position;
+
+            if (newBullet != null)
+            {
+                if (transform.localScale.x == 10) //shooting to the right.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arkSpeed * Time.deltaTime);
+                }
+                else if (transform.localScale.x == -10) //shooting to the left.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arkSpeed * Time.deltaTime);
+
+                }
+                Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+                Destroy(newBullet, 5);
+            }
+        }
+    }
+
+
+   /// <summary>
+   /// When you get the upgrade for shooting, player can shoot to the direction of which he/she is standing.
+   /// </summary>
+   /// <param name="bulletSpeed"></param>
+    void ShootingUpgrade(float bulletSpeed)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/New Bullet", typeof(GameObject)) as GameObject);
+            newBullet.transform.position = gameObject.transform.position;
+
+            if (newBullet != null)
+            {
+                if (transform.localScale.x == 10) //shooting to the right.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * bulletSpeed * Time.deltaTime);
+                }
+                else if (transform.localScale.x == -10) //shooting to the left.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * bulletSpeed * Time.deltaTime);
+                }
+                Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+                Destroy(newBullet, 1);
             }
         }
     }

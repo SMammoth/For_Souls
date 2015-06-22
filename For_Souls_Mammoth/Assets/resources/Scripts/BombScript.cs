@@ -36,5 +36,11 @@ public class BombScript : MonoBehaviour {
            AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 100, gameObject.transform.position, explosionRadius);
            Destroy(gameObject);
         }
+        else if (coll.gameObject)
+        {
+            Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity);
+            AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 50, gameObject.transform.position, explosionRadius);
+            Destroy(gameObject);
+        }
     }
 }
