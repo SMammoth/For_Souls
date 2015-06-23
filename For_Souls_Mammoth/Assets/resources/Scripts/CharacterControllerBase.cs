@@ -6,7 +6,7 @@ using System.Collections;
 public abstract class CharacterControllerBase : MonoBehaviour
 {
 	public int playerId;
-	private Player player;
+	public Player player;
 
 	public Sprite ClockPickup;
     bool bombExploding = false;
@@ -64,7 +64,11 @@ public abstract class CharacterControllerBase : MonoBehaviour
 	Vector2 StartPosition;
 
 	bool Upgrade;
-
+    GameObject newBullet;
+    GameObject defauttAttack, arcUpgradeAttack;
+    bool doAnimation = false;
+    public bool upgraded = false, shootUpgrade = false, arcBombUpgrade = false, arcPunchUpgrade = false;
+    Quaternion oldRotation;
 
 	void awake ()
 	{
@@ -91,6 +95,13 @@ public abstract class CharacterControllerBase : MonoBehaviour
 		PlayerBoxCollider = GetComponent<PolygonCollider2D> ();
 
 		PlayerAnimator = GetComponent<Animator> ();
+
+        defauttAttack = GameObject.Find("DefaultAttack").gameObject;
+        defauttAttack.SetActive(false);
+        arcUpgradeAttack = GameObject.Find("ArcUpgradeAttack").gameObject;
+        arcUpgradeAttack.SetActive(false);
+
+        oldRotation = arcUpgradeAttack.transform.rotation;
 
 		//no collision with the other players
 		Players = GameObject.FindGameObjectsWithTag ("Player");
@@ -160,10 +171,25 @@ public abstract class CharacterControllerBase : MonoBehaviour
                         MyBody2D.velocity = new Vector2(accel * maxspeed, MyBody2D.velocity.y);
                     }
                 }
-
-                //JUMP
-                if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
+                if (!upgraded && !shootUpgrade && !arcBombUpgrade && !arcPunchUpgrade)
                 {
+                    DefaultAttack();
+                }
+                else if(upgraded && shootUpgrade && !arcBombUpgrade && !arcPunchUpgrade)
+                {
+                    ShootingUpgrade(200000, 5000);
+                }
+                else if (upgraded && !shootUpgrade && arcBombUpgrade && !arcPunchUpgrade)
+                {
+                    ArcThrow(40000, 50000);
+                }
+                else if (upgraded && !shootUpgrade && !arcBombUpgrade && arcPunchUpgrade)
+                {
+                    ArcAttackUpgrade(20, 300);
+                }
+                //JUMP
+				if (!slidingUnder && grounded && player.GetButtonDown("Jump"))
+				{
                     //play animation jump
                     PlayerAnimator.SetTrigger("Jump");
                     //play Particle
@@ -172,7 +198,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     //Play Sound
                     GetComponent<AudioSource>().clip = Jump;
                     GetComponent<AudioSource>().Play();
-
+                   
                     //add force for jump
                     MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, 0);
                     MyBody2D.AddForce(new Vector2(0, Jumpforce));
@@ -186,6 +212,17 @@ public abstract class CharacterControllerBase : MonoBehaviour
                     SlidingTimer = 0;
                     Sliding = false;
                 }
+
+				if(player.GetButtonUp("Jump"))
+				{
+					if(MyBody2D.velocity.y > 0)
+					{
+						float bla = MyBody2D.velocity.y;
+						bla = bla / 1.5f;
+
+						MyBody2D.velocity = new Vector2(MyBody2D.velocity.x, bla);
+					}
+				}
 
                 //SLIDE
                 if (!Sliding && grounded && player.GetButtonDown("Duck"))
@@ -255,8 +292,145 @@ public abstract class CharacterControllerBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// this is the player default attack
+    /// </summary>
+    void DefaultAttack()
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            defauttAttack.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.X) || player.GetButtonUp("Shoot"))
+        {
+            defauttAttack.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// The Arc upgrade is a swipe attack from top to bottom
+    /// </summary>
+    /// <param name="hitTime"></param>
+    /// <param name="rotateTime"></param>
+    void ArcAttackUpgrade(float hitTime, float rotateTime)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            doAnimation = true;
+        }
+        if(arcUpgradeAttack.transform.position == GameObject.Find("targetArc").transform.position)
+        {
+            if (transform.localScale.x == 10) //shooting to the right.
+            {
+                arcUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y + 1);
+            }
+            else if (transform.localScale.x == -10) //shooting to the right.
+            {
+                arcUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y + 1);
+            }
+            arcUpgradeAttack.transform.rotation = oldRotation;
+            arcUpgradeAttack.SetActive(false);
+            doAnimation = false;
+        }
+
+        if (doAnimation)
+        {
+            arcUpgradeAttack.SetActive(true);
+            arcUpgradeAttack.transform.position = Vector2.MoveTowards(arcUpgradeAttack.transform.position, GameObject.Find("targetArc").transform.position, hitTime * Time.deltaTime);
+            arcUpgradeAttack.transform.rotation = Quaternion.RotateTowards(arcUpgradeAttack.transform.rotation, GameObject.Find("targetArc").transform.rotation, rotateTime * Time.deltaTime);
+        }
+    }
+
+
+    /// <summary>
+    /// Throw a object in the air in a arc
+    /// </summary>
+    /// <param name="arcSpeed"></param>
+    /// <param name="verticalSpeed"></param>
+    void ArcThrow(float arcSpeed, float verticalSpeed)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
+            newBullet.transform.position = gameObject.transform.position;
+
+            if (newBullet != null)
+            {
+                if (transform.localScale.x == 10) //shooting to the right.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
+                }
+                else if (transform.localScale.x == -10) //shooting to the left.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
+                }
+                Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+                Destroy(newBullet, 5);
+            }
+        }
+    }
+
+
+   /// <summary>
+    /// When you get the upgrade for shooting, player can shoot to the direction of which he/she is standing.
+   /// </summary>
+   /// <param name="bulletSpeed"></param>
+   /// <param name="backFire"></param>
+    void ShootingUpgrade(float bulletSpeed, float backFire)
+    {
+        if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
+        {
+            newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/New Bullet", typeof(GameObject)) as GameObject);
+            newBullet.transform.position = gameObject.transform.position;
+
+            if (newBullet != null)
+            {
+                if (transform.localScale.x == 10) //shooting to the right.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * bulletSpeed * Time.deltaTime);
+                    MyBody2D.velocity = new Vector2(0, MyBody2D.velocity.y);
+                    MyBody2D.AddForce(-Vector2.right * backFire);
+                    MyBody2D.AddForce(Vector2.up * backFire);
+                }
+                else if (transform.localScale.x == -10) //shooting to the left.
+                {
+                    newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * bulletSpeed * Time.deltaTime);
+                    MyBody2D.velocity = new Vector2(0, MyBody2D.velocity.y);
+                    MyBody2D.AddForce(Vector2.right * backFire);
+                    MyBody2D.AddForce(Vector2.up * backFire);
+                }
+                Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+                Destroy(newBullet, 1);
+            }
+        }
+    }
+
 	public virtual void OnTriggerEnter2D(Collider2D coll) 
 	{
+        if (coll.name == "shootUpgrade")
+        {
+            upgraded = true;
+            arcBombUpgrade = false;
+            shootUpgrade = true;
+            arcPunchUpgrade = false;
+        }
+        else if (coll.name == "ArcThrow")
+        {
+            upgraded = true;
+            arcBombUpgrade = true;
+            shootUpgrade = false;
+            arcPunchUpgrade = false;
+        }
+        else if (coll.name == "arcPunchUpgrade")
+        {
+            upgraded = true;
+            arcBombUpgrade = false;
+            shootUpgrade = false;
+            arcPunchUpgrade = true;
+        }
+
 		if (coll.tag == "EndLevel" && gameObject.tag == "Player")
 		{
 			GameObject.Find("FadeOut").GetComponent<Animator>().SetTrigger("fade");
