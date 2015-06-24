@@ -64,7 +64,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
 	Vector2 StartPosition;
 
 	bool Upgrade;
-    GameObject newBullet;
+    GameObject newBullet, arcThrow;
     GameObject defauttAttack, arcUpgradeAttack;
     bool doAnimation = false;
     public bool upgraded = false, shootUpgrade = false, arcBombUpgrade = false, arcPunchUpgrade = false;
@@ -351,23 +351,23 @@ public abstract class CharacterControllerBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
-            newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
-            newBullet.transform.position = gameObject.transform.position;
+            arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
+            arcThrow.transform.position = gameObject.transform.position;
 
-            if (newBullet != null)
+            if (arcThrow != null)
             {
                 if (transform.localScale.x == 10) //shooting to the right.
                 {
-                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
-                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
+                    arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
                 }
                 else if (transform.localScale.x == -10) //shooting to the left.
                 {
-                    newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
-                    newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
+                    arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                    arcThrow.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
                 }
-                Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
-                Destroy(newBullet, 5);
+                Physics2D.IgnoreCollision(arcThrow.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+                Destroy(arcThrow, 5);
             }
         }
     }
