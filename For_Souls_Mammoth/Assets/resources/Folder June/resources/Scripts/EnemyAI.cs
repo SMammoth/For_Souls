@@ -122,7 +122,7 @@ public class EnemyAI : MonoBehaviour
         body.AddForce(bodyDirection.normalized * explosionForce * calc);
     }
 
-    public void OnTriggerEnter2D(Collider2D coll)
+    public void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.transform.tag == "Player")
         {

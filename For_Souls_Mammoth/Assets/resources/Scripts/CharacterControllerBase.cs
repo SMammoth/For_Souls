@@ -65,10 +65,11 @@ public abstract class CharacterControllerBase : MonoBehaviour
 
 	bool Upgrade;
     GameObject newBullet, arcThrow;
-    GameObject defauttAttack, arcUpgradeAttack;
+    public GameObject defauttAttack, arcUpgradeAttack;
     bool doAnimation = false;
     public bool upgraded = false, shootUpgrade = false, arcBombUpgrade = false, arcPunchUpgrade = false;
     Quaternion oldRotation;
+    float counter = 2;
 
 	void awake ()
 	{
@@ -416,7 +417,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
             shootUpgrade = true;
             arcPunchUpgrade = false;
         }
-        else if (coll.name == "ArcThrow")
+        else if (coll.name == "ArcThrowBomb")
         {
             upgraded = true;
             arcBombUpgrade = true;

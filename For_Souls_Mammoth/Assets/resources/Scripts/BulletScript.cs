@@ -63,7 +63,7 @@ public class BulletScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.transform.tag != "Player")
+        if (coll.transform.tag == "Player")
         {
             Destroy(gameObject);
         }

@@ -7,9 +7,14 @@ public class BombScript : MonoBehaviour {
     public float explosionRadius;
 
     GameObject particleGameObject;
+    GameObject upgraded;
+
+    Player1_Class player;
 	// Use this for initialization
 	void Start () {
-	
+        player = GameObject.FindWithTag("Player").GetComponent<Player1_Class>();
+        upgraded = GameObject.Find("Upgraded");
+        upgraded.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -38,12 +43,30 @@ public class BombScript : MonoBehaviour {
            Destroy(gameObject);
            Destroy(particleGameObject, .001f);
         }
-        else if (coll.gameObject)
+        if (coll.gameObject.tag == "Enemy")
         {
             particleGameObject = Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity) as GameObject;
             AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 50, gameObject.transform.position, explosionRadius);
             Destroy(gameObject);
             Destroy(particleGameObject, .001f);
+            if (coll.gameObject.GetComponent<EnemyAI>().enemyType == "Ranged")
+            {
+                GameObject shootUpgrade = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/shootUpgrade", typeof(GameObject)) as GameObject);
+                shootUpgrade.name = "shootUpgrade";
+                shootUpgrade.transform.position = coll.gameObject.transform.position;
+            }
+            else if (coll.gameObject.GetComponent<EnemyAI>().enemyType == "Mine")
+            {
+                GameObject arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrowBomb", typeof(GameObject)) as GameObject);
+                arcThrow.name = "ArcThrowBomb";
+                arcThrow.transform.position = coll.gameObject.transform.position;
+            }
+            Destroy(coll.gameObject);
+        }
+        else if (coll.gameObject.tag == "Boss")
+        {
+            BossScript.health -= BossScript.doDamage;
+            Destroy(gameObject);
         }
     }
 }
