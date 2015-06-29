@@ -300,6 +300,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
+            PlayerAnimator.SetTrigger("Attack");
             defauttAttack.SetActive(true);
         }
         else if (Input.GetKeyUp(KeyCode.X) || player.GetButtonUp("Shoot"))
@@ -317,6 +318,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
+            PlayerAnimator.SetTrigger("Attack");
             doAnimation = true;
         }
         if (arcUpgradeAttack.transform.position.y <= GameObject.Find("targetArc").transform.position.y + .1f && arcUpgradeAttack.transform.position.y >= GameObject.Find("targetArc").transform.position.y - .1f)
@@ -352,6 +354,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
+            PlayerAnimator.SetTrigger("Attack");
             arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
             arcThrow.transform.position = gameObject.transform.position;
 
@@ -383,6 +386,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
+            PlayerAnimator.SetTrigger("Attack");
             newBullet = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/New Bullet", typeof(GameObject)) as GameObject);
             newBullet.transform.position = gameObject.transform.position;
 

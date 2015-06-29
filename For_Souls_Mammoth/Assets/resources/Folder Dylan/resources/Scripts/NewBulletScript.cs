@@ -4,9 +4,25 @@ using System.Collections;
 public class NewBulletScript : MonoBehaviour {
 
     Player1_Class player;
+    public bool shooting = false;
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player1_Class>();
+    }
+
+    void Update()
+    {
+        if (shooting)
+        {
+            if (player.transform.localScale.x == 5)
+            {
+                transform.localScale = new Vector3(5, 5, 5);
+            }
+            else if (player.transform.localScale.x == -5)
+            {
+                transform.localScale = new Vector3(-5, 5, 5);
+            }
+        }
     }
 
     /// <summary>
