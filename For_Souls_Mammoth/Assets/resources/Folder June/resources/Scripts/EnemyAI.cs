@@ -18,6 +18,11 @@ public class EnemyAI : MonoBehaviour
     private bool waitPls;
     private bool canHit = true;
 
+    [Header("Bomb Enemy")]
+    public float throwDelay;
+    private GameObject arcThrow;
+    private bool canThrow = true;
+
     [Header("Physics")]
     public float pushbackPower;
     public float pushbackRadius;
@@ -33,9 +38,11 @@ public class EnemyAI : MonoBehaviour
         isPatrolling = true;
         target = GameObject.FindWithTag("Player");
 
-        arcAttack = GameObject.Find("ArkAttackEnemy").gameObject;
-
-        oldRotation = arcAttack.transform.rotation;
+        if (enemyType == "Melee")
+        {
+            arcAttack = GameObject.Find("ArkAttackEnemy").gameObject;
+            oldRotation = arcAttack.transform.rotation;
+        }
     }
 
     // Update is called once per frame
@@ -82,7 +89,16 @@ public class EnemyAI : MonoBehaviour
             {
                 //Enemy slaat erop los 
                 ArcAttack(20, 300);
-                StartCoroutine(WaitForSecondsMelee(5));
+                StartCoroutine(WaitForSecondsMelee(hitDelay));
+            }
+        }
+
+        if (enemyType == "Bomb")
+        {
+            if (canThrow)
+            {
+                ArcThrow(40000, 50000);
+                StartCoroutine(WaitForSecondsBomb(throwDelay));
             }
         }
     }
@@ -145,6 +161,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    //Melee arc strike
     void ArcAttack(float hitTime, float rotateTime)
     {
         doAnimation = true;
@@ -173,6 +190,30 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    //Arc throw - bomb
+    void ArcThrow(float arcSpeed, float verticalSpeed)
+    {
+        arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
+        arcThrow.transform.position = gameObject.transform.position;
+
+        if (arcThrow != null)
+        {
+            if (transform.localScale.x == 1) //shooting to the right.
+            {
+                arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
+            }
+            else if (transform.localScale.x == -1) //shooting to the left.
+            {
+                arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
+                arcThrow.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
+            }
+            Physics2D.IgnoreCollision(arcThrow.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+            Destroy(arcThrow, 5);
+        }
+        canThrow = false;
+    }
+
     public IEnumerator WaitForSecondsRanged(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -183,21 +224,11 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         canHit = true;
-        /*float timer = 5;
+    }
 
-        if (!canHit)
-        {
-            timer -= Time.time;
-            Debug.Log(timer);
-            
-        }
-
-        if (timer <= 0)
-        {
-            Debug.Log("Hoi ik ben er");
-            timer = 5;
-            waitPls = false;
-            canHit = true;
-        }*/
+    public IEnumerator WaitForSecondsBomb(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canThrow = true;
     }
 }
