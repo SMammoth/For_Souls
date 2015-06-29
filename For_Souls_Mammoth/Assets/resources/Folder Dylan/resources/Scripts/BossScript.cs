@@ -26,7 +26,7 @@ public class BossScript : MonoBehaviour {
         movingLeft = true;
         prevBulletTimer = bulletTimer;
         bossHP = GameObject.Find("BossHealth").GetComponent<Image>();
-        bossHP.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 6);
+        bossHP.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1.5f);
 
 	}
 	
@@ -51,11 +51,11 @@ public class BossScript : MonoBehaviour {
     {
         CurrentPos = transform.position;
 
-        if (CurrentPos.y >= OriginalPos.y + 1f)
+        if (CurrentPos.y >= OriginalPos.y + .5f)
         {
             MovingUp = false;
         }
-        if (CurrentPos.y <= OriginalPos.y - 1f)
+        if (CurrentPos.y <= OriginalPos.y - .5f)
         {
             MovingUp = true;
         }
@@ -70,11 +70,11 @@ public class BossScript : MonoBehaviour {
 
         if (MovingUp)
         {
-            transform.Translate(0, (Time.deltaTime / 1.2f), 0);
+            transform.Translate(0, (Time.deltaTime / 1.4f), 0);
         }
         else if (!MovingUp)
         {
-            transform.Translate(0, (-Time.deltaTime / 1.2f), 0);
+            transform.Translate(0, (-Time.deltaTime / 1.4f), 0);
         }
 
         if (movingLeft)
@@ -94,7 +94,7 @@ public class BossScript : MonoBehaviour {
             bulletTimer -= Time.deltaTime;
             if (bulletTimer < 1)
             {
-                bullet = Instantiate(prefabBullet, new Vector2(gameObject.transform.position.x, Random.Range(gameObject.transform.position.y - 3, gameObject.transform.position.y - 1)), Quaternion.identity) as GameObject;
+                bullet = Instantiate(prefabBullet, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - .2f), Quaternion.identity) as GameObject;
                 Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
                 bullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * bulletSpeed * Time.deltaTime);
                 bulletTimer = prevBulletTimer;
@@ -105,7 +105,7 @@ public class BossScript : MonoBehaviour {
 
     void BossHealth()
     {
-        bossHP.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 6);
+        bossHP.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1.5f);
 
         if (health < 1)
         {

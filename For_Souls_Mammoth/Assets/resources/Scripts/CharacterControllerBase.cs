@@ -151,7 +151,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
                             transform.parent = null;
                         }
 
-                        transform.localScale = new Vector3(-10, 10, 1);
+                        transform.localScale = new Vector3(-5, 5, 1);
 
 
                         MyBody2D.velocity = new Vector2(-accel * maxspeed, MyBody2D.velocity.y);
@@ -167,7 +167,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
                             transform.parent = null;
                         }
 
-                        transform.localScale = new Vector3(10, 10, 1);
+                        transform.localScale = new Vector3(5, 5, 1);
 
                         MyBody2D.velocity = new Vector2(accel * maxspeed, MyBody2D.velocity.y);
                     }
@@ -178,11 +178,11 @@ public abstract class CharacterControllerBase : MonoBehaviour
                 }
                 else if(upgraded && shootUpgrade && !arcBombUpgrade && !arcPunchUpgrade)
                 {
-                    ShootingUpgrade(200000, 5000);
+                    ShootingUpgrade(200000, 2000);
                 }
                 else if (upgraded && !shootUpgrade && arcBombUpgrade && !arcPunchUpgrade)
                 {
-                    ArcThrow(40000, 50000);
+                    ArcThrow(30000, 30000);
                 }
                 else if (upgraded && !shootUpgrade && !arcBombUpgrade && arcPunchUpgrade)
                 {
@@ -319,13 +319,13 @@ public abstract class CharacterControllerBase : MonoBehaviour
         {
             doAnimation = true;
         }
-        if(arcUpgradeAttack.transform.position == GameObject.Find("targetArc").transform.position)
+        if (arcUpgradeAttack.transform.position.y <= GameObject.Find("targetArc").transform.position.y + .1f && arcUpgradeAttack.transform.position.y >= GameObject.Find("targetArc").transform.position.y - .1f)
         {
-            if (transform.localScale.x == 10) //shooting to the right.
+            if (transform.localScale.x == 5) //shooting to the right.
             {
                 arcUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y + 1);
             }
-            else if (transform.localScale.x == -10) //shooting to the right.
+            else if (transform.localScale.x == -5) //shooting to the right.
             {
                 arcUpgradeAttack.transform.position = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y + 1);
             }
@@ -357,12 +357,12 @@ public abstract class CharacterControllerBase : MonoBehaviour
 
             if (arcThrow != null)
             {
-                if (transform.localScale.x == 10) //shooting to the right.
+                if (transform.localScale.x == 5) //shooting to the right.
                 {
                     arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
                     arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
                 }
-                else if (transform.localScale.x == -10) //shooting to the left.
+                else if (transform.localScale.x == -5) //shooting to the left.
                 {
                     arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
                     arcThrow.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
@@ -388,14 +388,14 @@ public abstract class CharacterControllerBase : MonoBehaviour
 
             if (newBullet != null)
             {
-                if (transform.localScale.x == 10) //shooting to the right.
+                if (transform.localScale.x == 5) //shooting to the right.
                 {
                     newBullet.GetComponent<Rigidbody2D>().AddForce(Vector2.right * bulletSpeed * Time.deltaTime);
                     MyBody2D.velocity = new Vector2(0, MyBody2D.velocity.y);
                     MyBody2D.AddForce(-Vector2.right * backFire);
                     MyBody2D.AddForce(Vector2.up * backFire);
                 }
-                else if (transform.localScale.x == -10) //shooting to the left.
+                else if (transform.localScale.x == -5) //shooting to the left.
                 {
                     newBullet.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * bulletSpeed * Time.deltaTime);
                     MyBody2D.velocity = new Vector2(0, MyBody2D.velocity.y);
