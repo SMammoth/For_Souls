@@ -115,13 +115,13 @@ public class EnemyAI : MonoBehaviour
         if (checkCollisionRight && checkCollisionRight.transform.tag != "Player"
             || (transform.localPosition.x - target.transform.position.x > 0 && !isPatrolling))
         {
-            objectScale.x = -1;
+            objectScale.x = -5f;
             transform.localScale = objectScale;
         }
         else if (checkCollisionLeft && checkCollisionLeft.transform.tag != "Player"
             || (transform.localPosition.x - target.transform.position.x <= 0 && !isPatrolling))
         {
-            objectScale.x = 1;
+            objectScale.x = 5f;
             transform.localScale = objectScale;
         }
     }
@@ -149,13 +149,13 @@ public class EnemyAI : MonoBehaviour
     {
         doAnimation = true;
 
-        if (arcAttack.transform.position == GameObject.Find("targetArkEnemy").transform.position)
+        if (arcAttack.transform.position.y >= GameObject.Find("targetArkEnemy").transform.position.y - .1f && arcAttack.transform.position.y <= GameObject.Find("targetArkEnemy").transform.position.y + .1f)
         {
-            if (transform.localScale.x == 1)
+            if (transform.localScale.x == 5f)
             {
                 arcAttack.transform.position = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y + 1);
             }
-            else if (transform.localScale.x == -1)
+            else if (transform.localScale.x == -5f)
             {
                 arcAttack.transform.position = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y + 1);
             }

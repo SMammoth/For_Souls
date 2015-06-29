@@ -13,8 +13,8 @@ public class BombScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindWithTag("Player").GetComponent<Player1_Class>();
-        upgraded = GameObject.Find("Upgraded");
-        upgraded.SetActive(false);
+       /* upgraded = GameObject.Find("Upgraded");
+        upgraded.SetActive(false);*/
 	}
 	
 	// Update is called once per frame
@@ -60,6 +60,12 @@ public class BombScript : MonoBehaviour {
                 GameObject arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrowBomb", typeof(GameObject)) as GameObject);
                 arcThrow.name = "ArcThrowBomb";
                 arcThrow.transform.position = coll.gameObject.transform.position;
+            }
+            else if (coll.gameObject.GetComponent<EnemyAI>().enemyType == "Melee")
+            {
+                GameObject arcAttack = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/arcPunchUpgrade", typeof(GameObject)) as GameObject);
+                arcAttack.name = "arcPunchUpgrade";
+                arcAttack.transform.position = coll.gameObject.transform.position;
             }
             Destroy(coll.gameObject);
         }

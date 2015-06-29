@@ -24,9 +24,15 @@ public class NewBulletScript : MonoBehaviour {
             }
             else if (col.gameObject.GetComponent<EnemyAI>().enemyType == "Melee")
             {
-                GameObject arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrowBomb", typeof(GameObject)) as GameObject);
-                arcThrow.name = "ArcThrowBomb";
+                GameObject arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/arcPunchUpgrade", typeof(GameObject)) as GameObject);
+                arcThrow.name = "arcPunchUpgrade";
                 arcThrow.transform.position = col.gameObject.transform.position;
+            }
+            else if (col.gameObject.GetComponent<EnemyAI>().enemyType == "Bomb")
+            {
+                GameObject arcAttack = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrowBomb", typeof(GameObject)) as GameObject);
+                arcAttack.name = "ArcThrowBomb";
+                arcAttack.transform.position = col.gameObject.transform.position;
             }
             player.defauttAttack.SetActive(false);
             Destroy(col.gameObject);
@@ -39,7 +45,10 @@ public class NewBulletScript : MonoBehaviour {
         else if (col.gameObject.tag == "Boss")
         {
             BossScript.health -= BossScript.doDamage;
-            Destroy(gameObject);
+            if (gameObject.name != "DefaultAttack" || gameObject.name != "ArcUpgradeAttack")
+            {
+                Destroy(gameObject);
+            }
         }
         else if (col.gameObject.tag != "Enemy" && col.gameObject.tag != "Boss")
         {
