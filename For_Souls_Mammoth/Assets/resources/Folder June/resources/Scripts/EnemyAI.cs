@@ -3,23 +3,28 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
-    //hit-attack (Dylan's code kopiëren)
-    //
-
     [Header("Patrolling")]
     public float walkSpeed;
     public float detectionRange;
 
-    [Header("Attacking")]
+    [Header("Ranged Enemy")]
     public float shootingDelay;
-    private GameObject target;
     private bool canShoot = true;
+
+    [Header("Melee Enemy")]
+    public float hitDelay;
+    public GameObject arcAttack;
+    private Quaternion oldRotation;
+    private bool waitPls;
+    private bool canHit = true;
 
     [Header("Physics")]
     public float pushbackPower;
     public float pushbackRadius;
 
     public string enemyType;
+    private bool doAnimation;
+    private GameObject target;
     private bool isPatrolling;
 
     // Use this for initialization
@@ -27,6 +32,10 @@ public class EnemyAI : MonoBehaviour
     {
         isPatrolling = true;
         target = GameObject.FindWithTag("Player");
+
+        arcAttack = GameObject.Find("ArkAttackEnemy").gameObject;
+
+        oldRotation = arcAttack.transform.rotation;
     }
 
     // Update is called once per frame
@@ -53,6 +62,7 @@ public class EnemyAI : MonoBehaviour
 
     public void EnemyAttack()
     {
+        Debug.Log(canHit);
         transform.Translate(new Vector3(walkSpeed * transform.localScale.x * Time.deltaTime, 0, 0));
 
         if (enemyType == "Ranged")
@@ -62,13 +72,18 @@ public class EnemyAI : MonoBehaviour
                 //Schiet bullets met een bepaalde shooting rate
                 Instantiate(Resources.Load("Prefabs/Bullet", typeof(GameObject)), gameObject.transform.position, Quaternion.identity);
                 canShoot = false;
-                StartCoroutine(WaitForSeconds(shootingDelay));
+                StartCoroutine(WaitForSecondsRanged(shootingDelay));
             }
         }
 
-        if (enemyType == "Mine")
+        if (enemyType == "Melee")
         {
-
+            if (canHit)
+            {
+                //Enemy slaat erop los 
+                ArcAttack(20, 300);
+                StartCoroutine(WaitForSecondsMelee(5));
+            }
         }
     }
 
@@ -97,13 +112,13 @@ public class EnemyAI : MonoBehaviour
         Vector3 objectScale = transform.localScale;
 
         //Flip speed direction
-        if (checkCollisionRight && checkCollisionRight.transform.tag != "Player" 
+        if (checkCollisionRight && checkCollisionRight.transform.tag != "Player"
             || (transform.localPosition.x - target.transform.position.x > 0 && !isPatrolling))
         {
             objectScale.x = -1;
             transform.localScale = objectScale;
         }
-        else if (checkCollisionLeft && checkCollisionLeft.transform.tag != "Player" 
+        else if (checkCollisionLeft && checkCollisionLeft.transform.tag != "Player"
             || (transform.localPosition.x - target.transform.position.x <= 0 && !isPatrolling))
         {
             objectScale.x = 1;
@@ -130,9 +145,59 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitForSeconds(float shootingDelay)
+    void ArcAttack(float hitTime, float rotateTime)
     {
-        yield return new WaitForSeconds(shootingDelay);
+        doAnimation = true;
+
+        if (arcAttack.transform.position == GameObject.Find("targetArkEnemy").transform.position)
+        {
+            if (transform.localScale.x == 1)
+            {
+                arcAttack.transform.position = new Vector2(gameObject.transform.position.x + 1, gameObject.transform.position.y + 1);
+            }
+            else if (transform.localScale.x == -1)
+            {
+                arcAttack.transform.position = new Vector2(gameObject.transform.position.x - 1, gameObject.transform.position.y + 1);
+            }
+            arcAttack.transform.rotation = oldRotation;
+            arcAttack.SetActive(false);
+            doAnimation = false;
+            canHit = false;
+        }
+
+        if (doAnimation)
+        {
+            arcAttack.SetActive(true);
+            arcAttack.transform.position = Vector2.MoveTowards(arcAttack.transform.position, GameObject.Find("targetArkEnemy").transform.position, hitTime * Time.deltaTime);
+            arcAttack.transform.rotation = Quaternion.RotateTowards(arcAttack.transform.rotation, GameObject.Find("targetArkEnemy").transform.rotation, rotateTime * Time.deltaTime);
+        }
+    }
+
+    public IEnumerator WaitForSecondsRanged(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         canShoot = true;
+    }
+
+    public IEnumerator WaitForSecondsMelee(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        canHit = true;
+        /*float timer = 5;
+
+        if (!canHit)
+        {
+            timer -= Time.time;
+            Debug.Log(timer);
+            
+        }
+
+        if (timer <= 0)
+        {
+            Debug.Log("Hoi ik ben er");
+            timer = 5;
+            waitPls = false;
+            canHit = true;
+        }*/
     }
 }

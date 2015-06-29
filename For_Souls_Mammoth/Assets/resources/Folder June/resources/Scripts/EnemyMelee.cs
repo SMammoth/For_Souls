@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyMines : EnemyAI {
+public class EnemyMelee : EnemyAI {
 
 	// Use this for initialization
 	public void Start () {
         base.Start();
-        enemyType = "Mine";
+        enemyType = "Melee";
 	}
 	
 	// Update is called once per frame

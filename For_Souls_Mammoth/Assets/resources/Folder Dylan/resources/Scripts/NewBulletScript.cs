@@ -22,7 +22,7 @@ public class NewBulletScript : MonoBehaviour {
               shootUpgrade.name = "shootUpgrade";
               shootUpgrade.transform.position = col.gameObject.transform.position;
             }
-            else if (col.gameObject.GetComponent<EnemyAI>().enemyType == "Mine")
+            else if (col.gameObject.GetComponent<EnemyAI>().enemyType == "Melee")
             {
                 GameObject arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrowBomb", typeof(GameObject)) as GameObject);
                 arcThrow.name = "ArcThrowBomb";
