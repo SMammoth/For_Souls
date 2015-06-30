@@ -1,0 +1,57 @@
+Initialize engine version: 5.0.1f1 (5a2e8fe35a68)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: Intel(R) HD Graphics 3000 (ID=0x116)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Rewired_Core.dll (this message is harmless)
+Loading C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\Rewired_Core.dll into Unity Child Domain
+- Completed reload, in  0.053 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\System.dll (this message is harmless)
+Non platform assembly: data-0EB33350 (this message is harmless)
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/data-0EB33350.dll
+Non platform assembly: data-0EB47A38 (this message is harmless)
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/data-0EB47A38.dll
+Non platform assembly: data-0AA40020 (this message is harmless)
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/data-0AA40020.dll
+Rewired: Searching for compatible XInput library...
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/xinput1_4.dll
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/.\xinput1_4.dll
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/xinput1_4.dll
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/xinput1_4
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/.\xinput1_4
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/xinput1_4
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/libxinput1_4.dll
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/.\libxinput1_4.dll
+Fallback handler could not load library C:/Users/June/Documents/For_Souls/Builds/For_Souls_Prototype_Data/Mono/libxinput1_4.dll
+Rewired: Found Xinput1_3.dll.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Platform assembly: C:\Users\June\Documents\For_Souls\Builds\For_Souls_Prototype_Data\Managed\System.Xml.dll (this message is harmless)
+NullReferenceException: Object reference not set to an instance of an object
+  at CharacterControllerBase.Update () [0x00000] in <filename unknown>:0 
+  at Player1_Class.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
