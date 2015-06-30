@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b6cf2fb15cbffb243b1ad2178ec3bf29
-timeCreated: 1435583820
+timeCreated: 1435659357
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -26,6 +26,16 @@ TextureImporter:
     21300038: Archer_Sprite_Sheet_19
     21300040: Archer_Sprite_Sheet_20
     21300042: Archer_Sprite_Sheet_21
+    21300044: Archer_Sprite_Sheet_22
+    21300046: Archer_Sprite_Sheet_23
+    21300048: Archer_Sprite_Sheet_24
+    21300050: Archer_Sprite_Sheet_25
+    21300052: Archer_Sprite_Sheet_26
+    21300054: Archer_Sprite_Sheet_27
+    21300056: Archer_Sprite_Sheet_28
+    21300058: Archer_Sprite_Sheet_29
+    21300060: Archer_Sprite_Sheet_30
+    21300062: Archer_Sprite_Sheet_31
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -75,7 +85,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 160
+        y: 224
         width: 30
         height: 25
       alignment: 0
@@ -85,7 +95,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 33
-        y: 160
+        y: 224
         width: 30
         height: 25
       alignment: 0
@@ -94,59 +104,59 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 128
-        width: 30
-        height: 25
+        x: 65
+        y: 224
+        width: 31
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_3
       rect:
         serializedVersion: 2
-        x: 33
-        y: 128
-        width: 29
-        height: 24
+        x: 97
+        y: 224
+        width: 30
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_4
       rect:
         serializedVersion: 2
-        x: 64
-        y: 128
-        width: 32
-        height: 24
+        x: 1
+        y: 192
+        width: 30
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_5
       rect:
         serializedVersion: 2
-        x: 97
-        y: 128
-        width: 31
-        height: 25
+        x: 33
+        y: 192
+        width: 29
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 96
-        width: 30
-        height: 25
+        x: 64
+        y: 192
+        width: 32
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_7
       rect:
         serializedVersion: 2
-        x: 33
-        y: 96
-        width: 30
+        x: 97
+        y: 192
+        width: 31
         height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -154,19 +164,19 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 96
-        width: 31
-        height: 24
+        x: 0
+        y: 160
+        width: 30
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_9
       rect:
         serializedVersion: 2
-        x: 96
-        y: 96
-        width: 31
+        x: 33
+        y: 160
+        width: 30
         height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -174,19 +184,19 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_10
       rect:
         serializedVersion: 2
-        x: 1
-        y: 64
-        width: 30
-        height: 25
+        x: 64
+        y: 160
+        width: 31
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 30
+        x: 96
+        y: 160
+        width: 31
         height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -194,8 +204,8 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_12
       rect:
         serializedVersion: 2
-        x: 65
-        y: 64
+        x: 1
+        y: 128
         width: 30
         height: 25
       alignment: 0
@@ -204,18 +214,18 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_13
       rect:
         serializedVersion: 2
-        x: 97
-        y: 64
+        x: 32
+        y: 128
         width: 30
-        height: 24
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_14
       rect:
         serializedVersion: 2
-        x: 1
-        y: 32
+        x: 65
+        y: 128
         width: 30
         height: 25
       alignment: 0
@@ -224,19 +234,19 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_15
       rect:
         serializedVersion: 2
-        x: 32
-        y: 33
+        x: 97
+        y: 128
         width: 30
-        height: 23
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_16
       rect:
         serializedVersion: 2
-        x: 66
-        y: 32
-        width: 29
+        x: 1
+        y: 96
+        width: 30
         height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -244,50 +254,150 @@ TextureImporter:
     - name: Archer_Sprite_Sheet_17
       rect:
         serializedVersion: 2
-        x: 98
-        y: 32
-        width: 29
-        height: 24
+        x: 32
+        y: 97
+        width: 30
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_18
       rect:
         serializedVersion: 2
-        x: 2
-        y: 0
+        x: 66
+        y: 96
         width: 29
-        height: 21
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_19
       rect:
         serializedVersion: 2
-        x: 34
-        y: 0
+        x: 98
+        y: 96
         width: 29
-        height: 11
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_20
       rect:
         serializedVersion: 2
-        x: 66
-        y: 0
+        x: 2
+        y: 64
         width: 29
-        height: 14
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Archer_Sprite_Sheet_21
       rect:
         serializedVersion: 2
+        x: 34
+        y: 64
+        width: 29
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 64
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_23
+      rect:
+        serializedVersion: 2
         x: 96
-        y: 0
+        y: 64
         width: 31
         height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 32
+        width: 29
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 32
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 32
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 32
+        width: 29
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 29
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 30
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_30
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Archer_Sprite_Sheet_31
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 30
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

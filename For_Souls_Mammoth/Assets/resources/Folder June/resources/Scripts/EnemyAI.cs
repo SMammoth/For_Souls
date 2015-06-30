@@ -69,7 +69,6 @@ public class EnemyAI : MonoBehaviour
 
     public void EnemyAttack()
     {
-        Debug.Log(canHit);
         transform.Translate(new Vector3(walkSpeed * transform.localScale.x * Time.deltaTime, 0, 0));
 
         if (enemyType == "Ranged")
@@ -95,9 +94,10 @@ public class EnemyAI : MonoBehaviour
 
         if (enemyType == "Bomb")
         {
+            Debug.Log(canThrow);
             if (canThrow)
             {
-                ArcThrow(40000, 50000);
+                ArcThrow(30000, 30000);
                 StartCoroutine(WaitForSecondsBomb(throwDelay));
             }
         }
@@ -166,7 +166,7 @@ public class EnemyAI : MonoBehaviour
     {
         doAnimation = true;
 
-        if (arcAttack.transform.position.y >= GameObject.Find("targetArkEnemy").transform.position.y - .1f && arcAttack.transform.position.y <= GameObject.Find("targetArkEnemy").transform.position.y + .1f)
+        if (arcAttack.transform.position.y >= gameObject.transform.FindChild("targetArkEnemy").transform.position.y - .1f && arcAttack.transform.position.y <= gameObject.transform.FindChild("targetArkEnemy").transform.position.y + .1f)
         {
             if (transform.localScale.x == 5f)
             {
@@ -198,20 +198,20 @@ public class EnemyAI : MonoBehaviour
 
         if (arcThrow != null)
         {
-            if (transform.localScale.x == 1) //shooting to the right.
+            if (transform.localScale.x == 5) //shooting to the right.
             {
                 arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
                 arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.right * arcSpeed * Time.deltaTime);
             }
-            else if (transform.localScale.x == -1) //shooting to the left.
+            else if (transform.localScale.x == -5) //shooting to the left.
             {
                 arcThrow.GetComponent<Rigidbody2D>().AddForce(Vector2.up * verticalSpeed * Time.deltaTime);
                 arcThrow.GetComponent<Rigidbody2D>().AddForce(-Vector2.right * arcSpeed * Time.deltaTime);
             }
             Physics2D.IgnoreCollision(arcThrow.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); // ignore the player
+            canThrow = false;
             Destroy(arcThrow, 5);
         }
-        canThrow = false;
     }
 
     public IEnumerator WaitForSecondsRanged(float delay)
