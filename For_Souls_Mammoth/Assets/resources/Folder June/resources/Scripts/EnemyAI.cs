@@ -198,7 +198,8 @@ public class EnemyAI : MonoBehaviour
     //Arc throw - bomb
     void ArcThrow(float arcSpeed, float verticalSpeed)
     {
-        arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
+        arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/Fireball", typeof(GameObject)) as GameObject);
+        Debug.Log(arcThrow.name);
         arcThrow.transform.position = gameObject.transform.position;
 
         if (arcThrow != null)

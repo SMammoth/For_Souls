@@ -355,7 +355,7 @@ public abstract class CharacterControllerBase : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) || player.GetButtonDown("Shoot"))
         {
             PlayerAnimator.SetTrigger("Attack");
-            arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/ArcThrow", typeof(GameObject)) as GameObject);
+            arcThrow = Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/FireballPlayer", typeof(GameObject)) as GameObject);
             arcThrow.transform.position = gameObject.transform.position;
 
             if (arcThrow != null)

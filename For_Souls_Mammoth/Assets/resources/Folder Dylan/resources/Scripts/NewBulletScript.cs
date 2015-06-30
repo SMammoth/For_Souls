@@ -53,6 +53,7 @@ public class NewBulletScript : MonoBehaviour {
             }
             player.defauttAttack.SetActive(false);
             col.gameObject.GetComponent<EnemyAI>().enabled = false;
+            col.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(col.gameObject, 3);
             if (gameObject.name == "New Bullet")
             {

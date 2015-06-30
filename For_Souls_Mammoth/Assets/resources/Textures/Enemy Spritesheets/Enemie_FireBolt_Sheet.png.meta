@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: fa944f5a624948140819cd1896c10ab2
-timeCreated: 1435675365
+guid: 6dec10d8702663a419b2d89cf2ef8f16
+timeCreated: 1435675418
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Enemie_Snake_Sheet_0
-    21300002: Enemie_Snake_Sheet_1
-    21300004: Enemie_Snake_Sheet_2
-    21300006: Enemie_Snake_Sheet_3
-    21300008: Enemie_Snake_Sheet_4
-    21300010: Enemie_Snake_Sheet_5
+    21300000: Enemie_FireBolt_Sheet_0
+    21300002: Enemie_FireBolt_Sheet_1
+    21300004: Enemie_FireBolt_Sheet_2
+    21300006: Enemie_FireBolt_Sheet_3
+    21300008: Enemie_FireBolt_Sheet_4
+    21300010: Enemie_FireBolt_Sheet_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -55,63 +55,63 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Enemie_Snake_Sheet_0
+    - name: Enemie_FireBolt_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 32
-        height: 24
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Enemie_Snake_Sheet_1
+    - name: Enemie_FireBolt_Sheet_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 60
+        y: 64
         width: 32
-        height: 28
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Enemie_Snake_Sheet_2
+    - name: Enemie_FireBolt_Sheet_2
       rect:
         serializedVersion: 2
         x: 0
         y: 32
         width: 32
-        height: 25
+        height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Enemie_Snake_Sheet_3
+    - name: Enemie_FireBolt_Sheet_3
       rect:
         serializedVersion: 2
         x: 32
         y: 32
         width: 32
-        height: 25
+        height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Enemie_Snake_Sheet_4
+    - name: Enemie_FireBolt_Sheet_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 32
-        height: 28
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Enemie_Snake_Sheet_5
+    - name: Enemie_FireBolt_Sheet_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 28
+        x: 33
+        y: 1
+        width: 30
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
