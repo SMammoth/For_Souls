@@ -33,6 +33,11 @@ public class PlayerHealth : MonoBehaviour {
             canSubtract = false;
             StartCoroutine(WaitForSeconds(cooldownTime));
         }
+
+        if (healthPoints.Count <= 0 && coll.transform.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(transform.gameObject.GetComponent<Collider2D>(), coll.transform.gameObject.GetComponent<Collider2D>());
+        }
     }
 
     void CheckDeath()
@@ -44,7 +49,6 @@ public class PlayerHealth : MonoBehaviour {
                 animator.SetBool("Idle", false);
                 animator.SetTrigger("Dead");
                 GetComponent<Player1_Class>().enabled = false;
-                GetComponent<BoxCollider2D>().enabled = false;
                 Debug.Log("U ded bro");
                 bla = false;
             }

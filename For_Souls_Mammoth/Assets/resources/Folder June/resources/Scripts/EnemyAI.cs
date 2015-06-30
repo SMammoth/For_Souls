@@ -110,6 +110,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Check of speler zichtbaar is
         RaycastHit2D checkRay = Physics2D.Raycast(transform.position, target.transform.position - transform.position);
+        Debug.DrawLine(transform.position, target.transform.position, Color.cyan);
 
         //Patrol wel of niet
         if (Vector3.Distance(transform.position, target.transform.position) > detectionRange
