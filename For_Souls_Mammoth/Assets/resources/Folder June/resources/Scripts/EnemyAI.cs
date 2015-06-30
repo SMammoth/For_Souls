@@ -30,11 +30,13 @@ public class EnemyAI : MonoBehaviour
     public string enemyType;
     private bool doAnimation;
     private GameObject target;
+    private Animator animator;
     private bool isPatrolling;
-
+    public string attack, death;
     // Use this for initialization
     public void Start()
     {
+        animator = GetComponent<Animator>();
         isPatrolling = true;
         target = GameObject.FindWithTag("Player");
 
@@ -70,6 +72,7 @@ public class EnemyAI : MonoBehaviour
     public void EnemyAttack()
     {
         transform.Translate(new Vector3(walkSpeed * transform.localScale.x * Time.deltaTime, 0, 0));
+        animator.SetBool(attack, true);
 
         if (enemyType == "Ranged")
         {
@@ -112,6 +115,7 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Distance(transform.position, target.transform.position) > detectionRange
             || (Vector3.Distance(transform.position, target.transform.position) <= detectionRange && checkRay.collider.tag != "Player"))
         {
+            animator.SetBool(attack, false);
             return isPatrolling = true;
         }
         else

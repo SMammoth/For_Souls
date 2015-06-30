@@ -33,6 +33,7 @@ public class NewBulletScript : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy")
         {
+            col.gameObject.GetComponent<Animator>().SetTrigger(col.gameObject.GetComponent<EnemyAI>().death);
             if(col.gameObject.GetComponent<EnemyAI>().enemyType == "Ranged"){
               GameObject shootUpgrade =  Instantiate(Resources.Load("Folder Dylan/resources/Prefabs/shootUpgrade", typeof(GameObject)) as GameObject);
               shootUpgrade.name = "shootUpgrade";
@@ -51,7 +52,8 @@ public class NewBulletScript : MonoBehaviour {
                 arcAttack.transform.position = col.gameObject.transform.position;
             }
             player.defauttAttack.SetActive(false);
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<EnemyAI>().enabled = false;
+            Destroy(col.gameObject, 3);
             if (gameObject.name == "New Bullet")
             {
                 Destroy(gameObject);

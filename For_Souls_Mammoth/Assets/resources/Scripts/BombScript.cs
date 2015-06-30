@@ -45,6 +45,7 @@ public class BombScript : MonoBehaviour {
         }
         if (coll.gameObject.tag == "Enemy")
         {
+            coll.gameObject.GetComponent<Animator>().SetTrigger(coll.gameObject.GetComponent<EnemyAI>().death);
             particleGameObject = Instantiate(Resources.Load("Prefabs/Particles/Particle_Death", typeof(GameObject)), gameObject.transform.position, Quaternion.identity) as GameObject;
             AddExplosionForce(coll.transform.GetComponent<Rigidbody2D>(), explosionPower * 50, gameObject.transform.position, explosionRadius);
             Destroy(gameObject);

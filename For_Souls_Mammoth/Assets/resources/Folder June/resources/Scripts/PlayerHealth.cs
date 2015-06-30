@@ -43,8 +43,8 @@ public class PlayerHealth : MonoBehaviour {
             {
                 animator.SetBool("Idle", false);
                 animator.SetTrigger("Dead");
-                GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<Player1_Class>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
                 Debug.Log("U ded bro");
                 bla = false;
             }
